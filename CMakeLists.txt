@@ -13,6 +13,9 @@ find_package(fmt REQUIRED)
 # boost
 find_package(Boost REQUIRED)
 
+#threads
+find_package(Threads REQUIRED)
+
 FetchContent_Declare(
   metall
   GIT_REPOSITORY https://github.com/dice-group/metall.git
@@ -20,7 +23,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(metall)
 
-add_compile_definitions(BOOST_BIND_GLOBAL_PLACEHOLDERS BOOST_DISABLE_THREADS)
+add_compile_definitions(BOOST_BIND_GLOBAL_PLACEHOLDERS)
 
 add_executable(write_data write_data.cpp)
 include_directories(${Boost_INCLUDE_DIR} ${fmt_INCLUDE_DIR})
@@ -31,6 +34,7 @@ ${metall_SOURCE_DIR}/include
 target_link_libraries(write_data
 fmt::fmt
 Boost::Boost
+Threads::Threads
 )
 
 add_executable(read_data read_data.cpp)
@@ -41,5 +45,6 @@ ${metall_SOURCE_DIR}/include
 target_link_libraries(read_data
 fmt::fmt
 Boost::Boost
+Threads::Threads
 )
 
